@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "./App.tsx",
+    "./components/**/*",
+    "nativewind-env.d.ts"
+  ]
 }
