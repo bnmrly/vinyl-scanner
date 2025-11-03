@@ -5,7 +5,7 @@ node_modules/
 
 #misc
 notes.md
-
+tempdata.ts
 # Expo
 .expo/
 dist/
