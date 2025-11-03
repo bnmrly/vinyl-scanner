@@ -3,10 +3,15 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 
+// TODO: Above import prevents tailwind colour class being added to <Text />
+// import { Text, View } from "react-native";
+
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello World Tab One</Text>
+    <View className="border border-red-500" style={styles.container}>
+      <Text className="color-red-500 bg-yellow-200">
+        Hello World I want to be red with Tailwind!
+      </Text>
       <View
         style={styles.separator}
         lightColor="#eee"
