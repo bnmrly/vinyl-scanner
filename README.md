@@ -13,6 +13,8 @@ A simple React Native app built with Expo to scan barcodes of vinyl records and 
 ## Tech stack
 
 - React Native with Expo
+- Nativewind for styling
+- Material ui?
 - Expo Camera for barcode scanning
 - React Navigation with bottom tabs
 - Redux or AsyncStorage for local state management
