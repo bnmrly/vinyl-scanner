@@ -2,11 +2,9 @@ import { useScanBarcode } from "@/hooks/useScanBarcode";
 import { CameraView } from "expo-camera";
 import { Button, Text, View } from "react-native";
 
-import { Image } from "react-native";
+import { Card } from "./Card";
 
-// TODO: USE EXPO IMAGE
-
-export default function Scanner() {
+export const Scanner = () => {
   const {
     permission,
     requestPermission,
@@ -51,15 +49,15 @@ export default function Scanner() {
       {/* SCANNED → SHOW TEXT + BACKGROUND */}
       {scannedData && (
         <View className="flex-1 bg-orange-500 justify-center items-center">
-          <Text className="text-white text-3xl mb-4">SCANNED!</Text>
-          <Image
-            source={{ uri: scannedData.cover_image }}
-            style={{ width: 200, height: 200, marginBottom: 20 }}
-            resizeMode="contain"
+          <Card
+            url={scannedData?.cover_image}
+            title={scannedData?.title}
+            cardWrapperClassName="border-yellow-500"
+            titleWrapperClassName="text-blue-500"
           />
           <Button onPress={handleResetScan} title="Scan reset" />
         </View>
       )}
     </View>
   );
-}
+};
