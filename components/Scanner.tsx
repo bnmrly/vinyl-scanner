@@ -1,6 +1,6 @@
 import { useScanBarcode } from "@/hooks/useScanBarcode";
 import { CameraView } from "expo-camera";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 
 export default function Scanner() {
   const {
@@ -9,6 +9,7 @@ export default function Scanner() {
     scanned,
     scannedData,
     handleBarCodeScanned,
+    handleResetScan,
   } = useScanBarcode();
 
   if (!permission) return <View />;
@@ -47,6 +48,7 @@ export default function Scanner() {
         <View className="flex-1 bg-orange-500 justify-center items-center">
           <Text className="text-white text-3xl mb-4">SCANNED!</Text>
           <Text className="text-white text-xl">{scannedData}</Text>
+          <Button onPress={handleResetScan} title="Scan reset" />
         </View>
       )}
     </View>

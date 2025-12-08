@@ -43,11 +43,17 @@ export const useScanBarcode = () => {
 
   console.log("🚀 --- HOOK --- scannedData IN HOOK:", scannedData);
 
+  const handleResetScan = useCallback(() => {
+    setScanned(false);
+    setScannedData(null);
+  }, []);
+
   return {
     permission,
     requestPermission,
     scanned,
     scannedData,
     handleBarCodeScanned,
+    handleResetScan,
   };
 };
