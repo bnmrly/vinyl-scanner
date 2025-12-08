@@ -6,6 +6,7 @@ node_modules/
 #misc
 notes.md
 tempdata.ts
+.env
 # Expo
 .expo/
 dist/
