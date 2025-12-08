@@ -1,4 +1,4 @@
-import Scanner from "@/components/Scanner";
+import { Scanner } from "@/components/Scanner";
 // import { View } from "@/components/Themed";
 
 import { View } from "react-native";
