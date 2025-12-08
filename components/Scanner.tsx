@@ -1,77 +1,52 @@
-import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { useState } from "react";
-import { Alert, Button, Text, TouchableOpacity, View } from "react-native";
+import { useScanBarcode } from "@/hooks/useScanBarcode";
+import { CameraView } from "expo-camera";
+import { Text, View } from "react-native";
 
 export default function Scanner() {
-  const [facing, setFacing] = useState<CameraType>("back");
-  const [permission, requestPermission] = useCameraPermissions();
-  const [scanned, setScanned] = useState(false);
-  const [scannedData, setScannedData] = useState<string | null>(null);
-  console.log("🚀 --- Scanner --- scannedData:", scannedData);
+  const {
+    permission,
+    requestPermission,
+    scanned,
+    scannedData,
+    handleBarCodeScanned,
+  } = useScanBarcode();
 
-  if (!permission) {
-    // Camera permissions are still loading.
-    // TODO: ADD LOADING STATE HERE
-    return <View />;
-  }
+  if (!permission) return <View />;
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
     return (
-      <View className="flex-1 justify-center bg-black px-4">
-        <Text className="text-center pb-2 text-white">
-          We need your permission to show the camera
+      <View className="flex-1 justify-center items-center bg-yellow-500 px-4">
+        <Text className="text-center pb-2 text-black">
+          We need your permission to use the camera
         </Text>
-        <Button onPress={requestPermission} title="Grant permission" />
+        {/* <Button onPress={requestPermission} title="Grant permission" /> */}
       </View>
     );
   }
 
-  function toggleCameraFacing() {
-    setFacing((current) => (current === "back" ? "front" : "back"));
-  }
-
-  const handleBarCodeScanned = ({
-    data,
-    type,
-  }: {
-    data: string;
-    type: string;
-  }) => {
-    setScanned(true);
-    setScannedData(data);
-    Alert.alert("Barcode Scanned", `Type: ${type}\nData: ${data}`, [
-      {
-        text: "OK",
-        onPress: () => setScanned(false), // allow scanning again
-      },
-    ]);
-  };
-
   return (
-    <View className="flex-1 justify-center bg-black relative border border-purple-500">
-      <CameraView
-        style={{ flex: 1 }}
-        facing={facing}
-        className="border-4 border-red-500"
-        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-      />
-      <View className="absolute bottom-16 flex-row w-full px-16 bg-transparent">
-        <TouchableOpacity
-          className="flex-1 items-center"
-          onPress={toggleCameraFacing}
-        >
-          <Text className="text-white font-bold text-2xl">
-            scanner!!! Flip Camera
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <View className="flex-1 bg-green-500">
+      {/* NOT SCANNED → SHOW CAMERA */}
+      {!scannedData && (
+        <View className="flex-1 bg-blue-500">
+          <CameraView
+            style={{ flex: 1 }}
+            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+          />
 
+          <View className="">
+            <Text className="text-white text-lg px-4 py-2">
+              SCAN SOMETHING...
+            </Text>
+          </View>
+        </View>
+      )}
+
+      {/* SCANNED → SHOW TEXT + BACKGROUND */}
       {scannedData && (
-        <View className="absolute top-10 self-center bg-black bg-opacity-60 p-2 rounded-md">
-          <Text className="text-white text-base">
-            Scanned Data: {scannedData}
-          </Text>
+        <View className="flex-1 bg-orange-500 justify-center items-center">
+          <Text className="text-white text-3xl mb-4">SCANNED!</Text>
+          <Text className="text-white text-xl">{scannedData}</Text>
         </View>
       )}
     </View>

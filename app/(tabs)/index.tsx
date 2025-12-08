@@ -1,10 +1,10 @@
 import Scanner from "@/components/Scanner";
-import { Text, View } from "@/components/Themed";
+// import { View } from "@/components/Themed";
 
+import { View } from "react-native";
 export default function Scan() {
   return (
-    <View className="flex-1 border border-orange-500">
-      <Text className="">Scan barcodes here</Text>
+    <View className="flex-1 bg-red-300">
       <Scanner />
     </View>
   );
