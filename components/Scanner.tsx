@@ -2,6 +2,10 @@ import { useScanBarcode } from "@/hooks/useScanBarcode";
 import { CameraView } from "expo-camera";
 import { Button, Text, View } from "react-native";
 
+import { Image } from "react-native";
+
+// TODO: USE EXPO IMAGE
+
 export default function Scanner() {
   const {
     permission,
@@ -11,6 +15,7 @@ export default function Scanner() {
     handleBarCodeScanned,
     handleResetScan,
   } = useScanBarcode();
+  console.log("🚀 --- Scanner --- scannedData:", scannedData);
 
   if (!permission) return <View />;
 
@@ -47,7 +52,11 @@ export default function Scanner() {
       {scannedData && (
         <View className="flex-1 bg-orange-500 justify-center items-center">
           <Text className="text-white text-3xl mb-4">SCANNED!</Text>
-          <Text className="text-white text-xl">{scannedData}</Text>
+          <Image
+            source={{ uri: scannedData.cover_image }}
+            style={{ width: 200, height: 200, marginBottom: 20 }}
+            resizeMode="contain"
+          />
           <Button onPress={handleResetScan} title="Scan reset" />
         </View>
       )}

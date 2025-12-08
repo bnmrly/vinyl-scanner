@@ -8,10 +8,12 @@ type BarCodeData = {
 
 // TODO: LINK USER TO SETTINGS FOR SAD PATH
 
+// TODO: Currently settimg scanned data to be just the first result in the array  for ease
+
 export const useScanBarcode = () => {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
-  const [scannedData, setScannedData] = useState<string | null>(null);
+  const [scannedData, setScannedData] = useState<any | null>(null); // TODO: FIX ANY TYPE
 
   const handleBarCodeScanned = useCallback(
     async ({ data, type }: BarCodeData) => {
@@ -28,9 +30,9 @@ export const useScanBarcode = () => {
           }
 
           const responseData = await response.json();
-          console.log("Discogs search result:", responseData);
+          const firstResult = responseData.results?.[0] ?? null;
 
-          setScannedData(data);
+          setScannedData(firstResult);
         }
       } catch (err) {
         console.log("err", err);
