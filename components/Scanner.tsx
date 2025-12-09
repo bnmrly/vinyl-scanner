@@ -39,13 +39,12 @@ export const Scanner = () => {
           />
 
           <View className="">
-            <Text className="text-white text-lg px-4 py-2">
-              SCAN SOMETHING...
-            </Text>
+            <Text className="text-lg px-4 py-2">SCAN SOMETHING...</Text>
           </View>
         </View>
       )}
 
+      {/* TODO: ADD BUTTON TO THEMED COMPONENTS */}
       {/* SCANNED → SHOW TEXT + BACKGROUND */}
       {scannedData && (
         <View className="flex-1 bg-orange-500 justify-center items-center">

@@ -9,7 +9,7 @@ export default function NotFoundScreen() {
         <Text className="text-xl font-bold">This screen doesn't exist.</Text>
 
         <Link href="/" className="mt-4 py-4">
-          <Text className="text-sm text-blue-600">Go to home screen!</Text>
+          <Text>Go to home screen!</Text>
         </Link>
       </View>
     </>

@@ -1,6 +1,9 @@
 import { twMerge } from "@/app/utillities/utilities";
+
 import { Image } from "expo-image";
-import { Text, View } from "react-native";
+
+import { Text, View } from "@/components/Themed";
+
 import type { ClassNameValue } from "tailwind-merge";
 
 type CardProps = {
@@ -12,7 +15,9 @@ type CardProps = {
 
 const baseCardClassName = "border-8 border-blue-500";
 
-const baseTextClassName = "text-red-500";
+// const baseTextClassName = "text-red-500";
+
+const baseTextClassName = "";
 
 export const Card = ({
   url,
