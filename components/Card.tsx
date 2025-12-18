@@ -1,4 +1,4 @@
-import { twMerge } from "@/app/utillities/utilities";
+import { twMerge } from "@/utilities/utilities";
 
 import { Image } from "expo-image";
 
