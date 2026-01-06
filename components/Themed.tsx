@@ -1,6 +1,6 @@
 import { Text as DefaultText, View as DefaultView } from "react-native";
 
-import { useThemeColor } from "./useThemeColor";
+import { useThemeColor } from "../hooks/useThemeColor";
 
 type ThemeProps = {
   lightColor?: string;
