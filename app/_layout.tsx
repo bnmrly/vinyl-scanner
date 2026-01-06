@@ -1,17 +1,22 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { ColorSchemeName, useColorScheme } from "react-native";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider as NavThemeProvider,
+} from "@react-navigation/native";
 import "react-native-reanimated";
+import * as SplashScreen from "expo-splash-screen";
+import { Stack, ErrorBoundary } from "expo-router";
+import { useFonts } from "expo-font";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+
+import {
+  ThemeProvider as AppThemeProvider,
+  useTheme as useAppTheme,
+} from "@/theme/ThemeContext";
+
 import "../global.css";
-
-import { useColorScheme } from "@/components/useColorScheme";
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -26,8 +31,7 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  //Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -49,11 +53,22 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    // <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-    </Stack>
-    // </ThemeProvider>
+    <AppThemeProvider>
+      <NavInside colorScheme={colorScheme} />
+    </AppThemeProvider>
+  );
+}
+
+function NavInside({ colorScheme }: { colorScheme?: ColorSchemeName | null }) {
+  const { theme } = useAppTheme();
+  const navTheme = theme === "dark" ? DarkTheme : DefaultTheme;
+
+  return (
+    <NavThemeProvider value={navTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+      </Stack>
+    </NavThemeProvider>
   );
 }

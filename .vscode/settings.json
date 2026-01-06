@@ -1,7 +1,9 @@
 {
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  }
+    "source.organizeImports": "never",
+    "source.fixAll.eslint": "never",
+    "source.fixAll": "never"
+  },
+  "eslint.format.enable": true
 }
