@@ -4,9 +4,7 @@ import { useToggleTheme } from "@/hooks/useToggleTheme";
 
 import { Text, View } from "@/components/Themed";
 
-
-
-export default function Profile() {
+export const Profile = () => {
   const { theme, toggleTheme } = useToggleTheme();
 
   return (
@@ -24,4 +22,6 @@ export default function Profile() {
       </Pressable>
     </View>
   );
-}
+};
+
+export default Profile;

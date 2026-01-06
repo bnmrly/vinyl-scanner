@@ -1,10 +1,10 @@
 import { useTheme } from "@/theme/ThemeContext";
 import Colors from "@/constants/Colors";
 
-export function useThemeColor(
+export const useThemeColor = (
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
+) => {
   const { theme } = useTheme();
 
   const colorFromProps = props[theme];
@@ -13,4 +13,4 @@ export function useThemeColor(
   }
 
   return Colors[theme][colorName];
-}
+};

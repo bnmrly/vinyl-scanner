@@ -1,7 +1,7 @@
 import { Text, View } from "@/components/Themed";
 import { Link, Stack } from "expo-router";
 
-export default function NotFoundScreen() {
+export const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Oops!" }} />
@@ -14,4 +14,6 @@ export default function NotFoundScreen() {
       </View>
     </>
   );
-}
+};
+
+export default NotFoundScreen;

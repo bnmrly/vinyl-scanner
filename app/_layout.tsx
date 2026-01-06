@@ -26,7 +26,7 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+export const RootLayout = () => {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
@@ -47,9 +47,9 @@ export default function RootLayout() {
   }
 
   return <RootLayoutNav />;
-}
+};
 
-function RootLayoutNav() {
+const RootLayoutNav = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -57,9 +57,9 @@ function RootLayoutNav() {
       <NavInside colorScheme={colorScheme} />
     </AppThemeProvider>
   );
-}
+};
 
-function NavInside({ colorScheme }: { colorScheme?: ColorSchemeName | null }) {
+const NavInside = ({ colorScheme }: { colorScheme?: ColorSchemeName | null }) => {
   const { theme } = useAppTheme();
   const navTheme = theme === "dark" ? DarkTheme : DefaultTheme;
 
@@ -71,4 +71,6 @@ function NavInside({ colorScheme }: { colorScheme?: ColorSchemeName | null }) {
       </Stack>
     </NavThemeProvider>
   );
-}
+};
+
+export default RootLayout;

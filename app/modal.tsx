@@ -3,7 +3,7 @@ import { Platform } from "react-native";
 
 import { Text, View } from "@/components/Themed";
 
-export default function ModalScreen() {
+export const ModalScreen = () => {
   return (
     <View className="flex-1 items-center justify-center">
       <Text className="text-xl font-bold">Modal</Text>
@@ -18,4 +18,6 @@ export default function ModalScreen() {
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </View>
   );
-}
+};
+
+export default ModalScreen;
