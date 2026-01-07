@@ -3,7 +3,7 @@ import { useColorScheme, Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome"; //TODO: MATERIAL UI?
 import { Link, Tabs } from "expo-router";
 
-import Colors from "@/constants/Colors";
+import {colors} from "@/designSystem/tokens/colors";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -19,7 +19,7 @@ export const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: colors[colorScheme ?? "light"].tint,
         headerShown: true,
       }}
     >
@@ -35,7 +35,7 @@ export const TabLayout = () => {
                   <FontAwesome
                     name="info-circle"
                     size={25}
-                    color={Colors[colorScheme ?? "light"].text}
+                    color={colors[colorScheme ?? "light"].text}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

@@ -1,15 +1,18 @@
-import { Text, View } from "@/components/Themed";
+// 3rd Party
 import { Link, Stack } from "expo-router";
+//UI
+import {  View } from "@/components/Themed";
+import { AppText } from "@/components/AppText";
 
 export const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Oops!" }} />
       <View className="flex-1 items-center justify-center p-5">
-        <Text className="text-xl font-bold">This screen doesn't exist.</Text>
+        <AppText className="text-xl font-bold">This screen doesn't exist.</AppText>
 
         <Link href="/" className="mt-4 py-4">
-          <Text>Go to home screen!</Text>
+          <AppText>Go to home screen!</AppText>
         </Link>
       </View>
     </>

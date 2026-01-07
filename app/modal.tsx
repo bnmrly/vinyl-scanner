@@ -1,13 +1,15 @@
-import { StatusBar } from "expo-status-bar";
+// 3rd party
 import { Platform } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
-import { Text, View } from "@/components/Themed";
+// UI
+import {  View } from "@/components/Themed";
+import { AppText } from "@/components/AppText";
 
 export const ModalScreen = () => {
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-xl font-bold">Modal</Text>
-
+      <AppText className="text-xl font-bold">Modal</AppText>
       <View
         className="my-8 w-4/5 h-px"
         lightColor="#eee"

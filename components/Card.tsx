@@ -2,9 +2,13 @@ import { twMerge } from "@/utilities/utilities";
 
 import { Image } from "expo-image";
 
-import { Text, View } from "@/components/Themed";
+import { View } from "@/components/Themed";
+
+import { AppText } from "./AppText";
 
 import type { ClassNameValue } from "tailwind-merge";
+
+import {colors} from "@/designSystem/tokens/colors";
 
 type CardProps = {
   url: string;
@@ -15,8 +19,6 @@ type CardProps = {
 
 const baseCardClassName = "border-8 border-blue-500";
 
-// const baseTextClassName = "text-red-500";
-
 const baseTextClassName = "";
 
 export const Card = ({
@@ -25,6 +27,8 @@ export const Card = ({
   cardWrapperClassName,
   titleWrapperClassName,
 }: CardProps) => {
+
+
   return (
     <View className={twMerge([baseCardClassName, cardWrapperClassName])}>
       <Image
@@ -32,9 +36,7 @@ export const Card = ({
         style={{ width: 200, height: 200, marginBottom: 20 }}
       />
       <View className="">
-        <Text className={twMerge([baseTextClassName, titleWrapperClassName])}>
-          {title}
-        </Text>
+        <AppText lightColor={colors.light.textBrand} darkColor={colors.dark.textBrand} className="font-thin">{title}</AppText>
       </View>
     </View>
   );

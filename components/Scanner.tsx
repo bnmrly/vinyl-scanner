@@ -1,7 +1,12 @@
-import { useScanBarcode } from "@/hooks/useScanBarcode";
+// 3rd party
 import { CameraView } from "expo-camera";
-import { Button, Text, View } from "react-native";
+import { Button, View } from "react-native";
 
+// Hooks and utilities
+import { useScanBarcode } from "@/hooks/useScanBarcode";
+
+//UI
+import { AppText } from "./AppText";
 import { Card } from "./Card";
 
 export const Scanner = () => {
@@ -20,9 +25,9 @@ export const Scanner = () => {
   if (!permission.granted) {
     return (
       <View className="flex-1 justify-center items-center bg-yellow-500 px-4">
-        <Text className="text-center pb-2 text-black">
+        <AppText className="text-center pb-2 text-black">
           We need your permission to use the camera
-        </Text>
+        </AppText>
         {/* <Button onPress={requestPermission} title="Grant permission" /> */}
       </View>
     );
@@ -39,13 +44,13 @@ export const Scanner = () => {
           />
 
           <View className="">
-            <Text className="text-lg px-4 py-2">SCAN SOMETHING...</Text>
+            <AppText className="text-lg px-4 py-2">SCAN SOMETHING...</AppText>
           </View>
         </View>
       )}
 
-      {/* TODO: ADD BUTTON TO THEMED COMPONENTS */}
-      {/* SCANNED → SHOW TEXT + BACKGROUND */}
+      {/* TODO: Create themed button */}
+  
       {scannedData && (
         <View className="flex-1 bg-orange-500 justify-center items-center">
           <Card

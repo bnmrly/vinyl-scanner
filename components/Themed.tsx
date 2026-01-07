@@ -1,4 +1,4 @@
-import { Text as DefaultText, View as DefaultView } from "react-native";
+import { View as DefaultView } from "react-native";
 
 import { useThemeColor } from "../hooks/useThemeColor";
 
@@ -7,15 +7,9 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText["props"];
+
 export type ViewProps = ThemeProps & DefaultView["props"];
 
-export const Text = (props: TextProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
-};
 
 export const View = (props: ViewProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;

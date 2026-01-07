@@ -1,9 +1,11 @@
-import { Text, View } from "@/components/Themed";
+// UI
+import { View } from "@/components/Themed";
+import { AppText } from "@/components/AppText"
 
 export const Collection = () => {
   return (
     <View className="flex-1 border border-yellow-500">
-      <Text className="">View collection here</Text>
+      <AppText className="">View collection here</AppText>
     </View>
   );
 };
