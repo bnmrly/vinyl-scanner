@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { ColorSchemeName, useColorScheme } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
@@ -7,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import "react-native-reanimated";
 import * as SplashScreen from "expo-splash-screen";
-import { Stack, ErrorBoundary } from "expo-router";
+import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -50,16 +49,14 @@ export const RootLayout = () => {
 };
 
 const RootLayoutNav = () => {
-  const colorScheme = useColorScheme();
-
   return (
     <AppThemeProvider>
-      <NavInside colorScheme={colorScheme} />
+      <Nav />
     </AppThemeProvider>
   );
 };
 
-const NavInside = ({ colorScheme }: { colorScheme?: ColorSchemeName | null }) => {
+const Nav = () => {
   const { theme } = useAppTheme();
   const navTheme = theme === "dark" ? DarkTheme : DefaultTheme;
 
