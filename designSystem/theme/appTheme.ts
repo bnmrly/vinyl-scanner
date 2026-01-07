@@ -3,7 +3,7 @@ import { colors } from '@/designSystem/tokens/colors';
 export const Theme = {
   light: {
     text: colors.black.blackBlue,
-    textBrand: colors.red[500],
+    textBrand: colors.green[500],
     background: colors.grey[100],
     tint: colors.orange[300],
     tabIconDefault: colors.grey[600],

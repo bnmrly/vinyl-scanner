@@ -42,7 +42,7 @@ export const Card = ({
         style={{ width: 200, height: 200, marginBottom: 20 }}
       />
       <View className="">
-        <AppText lightColor={Theme.light.textBrand} darkColor={Theme.dark.textBrand} className="font-thin">{title}</AppText>
+        <AppText lightColor={Theme.light.textBrand} darkColor={Theme.dark.textBrand} className="">{title}</AppText>
       </View>
     </View>
   );
