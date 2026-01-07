@@ -15,7 +15,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   ThemeProvider as AppThemeProvider,
   useTheme as useAppTheme,
-} from "@/theme/ThemeContext";
+} from "@/context/ThemeContext";
 
 // Styling
 import "../global.css";

@@ -1,9 +1,9 @@
-import { useTheme } from "@/theme/ThemeContext";
-import {colors} from "@/designSystem/tokens/colors";
+import { useTheme } from "@/context/ThemeContext";
+import { Theme } from '@/designSystem/theme/appTheme';
 
 export const useThemeColor = (
   props: { light?: string; dark?: string },
-  colorName: keyof typeof colors.light & keyof typeof colors.dark
+  colorName: keyof typeof Theme.light & keyof typeof Theme.dark
 ) => {
   const { theme } = useTheme();
 
@@ -12,5 +12,5 @@ export const useThemeColor = (
     return colorFromProps;
   }
 
-  return colors[theme][colorName];
+  return Theme[theme][colorName];
 };

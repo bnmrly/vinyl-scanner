@@ -4,8 +4,8 @@ import { Image } from "expo-image";
 // Hooks and utilities
 import { twMerge } from "@/utilities/utilities";
 
-// Design system
-import { colors } from "@/designSystem/tokens/colors";
+// Theme
+import { Theme } from '@/designSystem/theme/appTheme';
 
 // UI
 import { View } from "@/components/Themed";
@@ -42,7 +42,7 @@ export const Card = ({
         style={{ width: 200, height: 200, marginBottom: 20 }}
       />
       <View className="">
-        <AppText lightColor={colors.light.textBrand} darkColor={colors.dark.textBrand} className="font-thin">{title}</AppText>
+        <AppText lightColor={Theme.light.textBrand} darkColor={Theme.dark.textBrand} className="font-thin">{title}</AppText>
       </View>
     </View>
   );
