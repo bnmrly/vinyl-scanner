@@ -1,3 +1,4 @@
+// 3rd party
 import { useEffect } from "react";
 import {
   DarkTheme,
@@ -10,11 +11,13 @@ import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
+// Context
 import {
   ThemeProvider as AppThemeProvider,
   useTheme as useAppTheme,
 } from "@/theme/ThemeContext";
 
+// Styling
 import "../global.css";
 
 export const unstable_settings = {

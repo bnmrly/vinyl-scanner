@@ -1,5 +1,5 @@
+// UI
 import { Scanner } from "@/components/Scanner";
-// import { View } from "@/components/Themed";
 
 import { View } from "react-native";
 export const Scan = () => {

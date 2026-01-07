@@ -1,8 +1,10 @@
+// 3rd party
 import React from "react";
 import { useColorScheme, Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome"; //TODO: MATERIAL UI?
 import { Link, Tabs } from "expo-router";
 
+// Design System
 import {colors} from "@/designSystem/tokens/colors";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/

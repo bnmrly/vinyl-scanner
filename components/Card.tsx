@@ -1,14 +1,20 @@
-import { twMerge } from "@/utilities/utilities";
-
+// 3rd party
 import { Image } from "expo-image";
 
-import { View } from "@/components/Themed";
+// Hooks and utilities
+import { twMerge } from "@/utilities/utilities";
 
+// Design system
+import { colors } from "@/designSystem/tokens/colors";
+
+// UI
+import { View } from "@/components/Themed";
 import { AppText } from "./AppText";
 
+// Types
 import type { ClassNameValue } from "tailwind-merge";
 
-import {colors} from "@/designSystem/tokens/colors";
+
 
 type CardProps = {
   url: string;
