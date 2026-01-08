@@ -1,12 +1,12 @@
 // UI
+import { AppView } from "@/components/AppView";
 import { Scanner } from "@/components/Scanner";
 
-import { View } from "react-native";
 export const Scan = () => {
   return (
-    <View className="flex-1 bg-red-300">
+    <AppView className="flex-1 bg-red-300">
       <Scanner />
-    </View>
+    </AppView>
   );
 };
 

@@ -7,7 +7,7 @@ import { useThemeColor } from "../hooks/useThemeColor";
 import { twMerge } from "@/utilities/utilities";
 
 // Types
-import type { TextProps as RNTextProps, StyleProp, TextStyle } from "react-native";
+import type { TextProps as RNTextProps } from "react-native";
 import type { ClassNameValue } from "tailwind-merge";
 
 //  Color is controlled by `constants/Colors.ts` via `useThemeColor`.
@@ -35,7 +35,7 @@ export const AppText: React.FC<AppTextProps> = ({
 
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const mergedClassName = twMerge([baseTextClassName, className]);
-  const textStyle: StyleProp<TextStyle> = [style, { color }];
+  const textStyle = [style, { color }];
 
   return (
     <RNText className={mergedClassName} style={textStyle} {...otherProps}>

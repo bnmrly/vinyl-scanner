@@ -8,13 +8,11 @@ import { twMerge } from "@/utilities/utilities";
 import { Theme } from '@/designSystem/theme/appTheme';
 
 // UI
-import { View } from "@/components/Themed";
+import { AppView } from "./AppView";
 import { AppText } from "./AppText";
 
 // Types
 import type { ClassNameValue } from "tailwind-merge";
-
-
 
 type CardProps = {
   url: string;
@@ -34,16 +32,15 @@ export const Card = ({
   titleWrapperClassName,
 }: CardProps) => {
 
-
   return (
-    <View className={twMerge([baseCardClassName, cardWrapperClassName])}>
+    <AppView className={twMerge([baseCardClassName, cardWrapperClassName])}>
       <Image
         source={{ uri: url }}
         style={{ width: 200, height: 200, marginBottom: 20 }}
       />
-      <View className="">
+      <AppView className="">
         <AppText lightColor={Theme.light.textBrand} darkColor={Theme.dark.textBrand} className="">{title}</AppText>
-      </View>
-    </View>
+      </AppView>
+    </AppView>
   );
 };

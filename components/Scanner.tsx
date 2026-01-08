@@ -6,8 +6,10 @@ import { Button, View } from "react-native";
 import { useScanBarcode } from "@/hooks/useScanBarcode";
 
 //UI
+import { AppView } from "./AppView";
 import { AppText } from "./AppText";
 import { Card } from "./Card";
+
 
 export const Scanner = () => {
   const {
@@ -20,39 +22,39 @@ export const Scanner = () => {
   } = useScanBarcode();
   console.log("🚀 --- Scanner --- scannedData:", scannedData);
 
-  if (!permission) return <View />;
+  if (!permission) return null;
 
   if (!permission.granted) {
     return (
-      <View className="flex-1 justify-center items-center bg-yellow-500 px-4">
+      <AppView> className="flex-1 justify-center items-center bg-yellow-500 px-4">
         <AppText className="text-center pb-2 text-black">
           We need your permission to use the camera
         </AppText>
         {/* <Button onPress={requestPermission} title="Grant permission" /> */}
-      </View>
+      </AppView>
     );
   }
 
   return (
-    <View className="flex-1 bg-green-500">
+    <AppView className="flex-1 bg-green-500">
       {/* NOT SCANNED → SHOW CAMERA */}
       {!scannedData && (
-        <View className="flex-1 bg-blue-500">
+        <AppView className="flex-1 bg-blue-500">
           <CameraView
             style={{ flex: 1 }}
             onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
           />
 
-          <View className="">
+          <AppView className="border-4 border-red-500">
             <AppText className="text-lg px-4 py-2">SCAN SOMETHING...</AppText>
-          </View>
-        </View>
+          </AppView>
+        </AppView>
       )}
 
       {/* TODO: Create themed button */}
   
       {scannedData && (
-        <View className="flex-1 bg-orange-500 justify-center items-center">
+        <AppView className="flex-1 bg-orange-500 justify-center items-center">
           <Card
             url={scannedData?.cover_image}
             title={scannedData?.title}
@@ -60,8 +62,8 @@ export const Scanner = () => {
             titleWrapperClassName="text-blue-500"
           />
           <Button onPress={handleResetScan} title="Scan reset" />
-        </View>
+        </AppView>
       )}
-    </View>
+    </AppView>
   );
 };

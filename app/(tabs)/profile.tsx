@@ -5,14 +5,14 @@ import { Pressable } from "react-native";
 import { useToggleTheme } from "@/hooks/useToggleTheme";
 
 // UI
-import {  View } from "@/components/Themed";
+import { AppView } from "@/components/AppView";
 import { AppText } from "@/components/AppText";
 
 export const Profile = () => {
   const { theme, toggleTheme } = useToggleTheme();
 
   return (
-    <View className="flex-1 px-4 py-6">
+   <AppView className="flex-1 px-4 py-6">
       <AppText className="mb-4">View Profile here</AppText>
       <Pressable
         onPress={toggleTheme}
@@ -23,7 +23,7 @@ export const Profile = () => {
           Toggle Theme (current: {theme})
         </AppText>
       </Pressable>
-    </View>
+    </AppView >
   );
 };
 
