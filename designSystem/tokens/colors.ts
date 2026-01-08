@@ -1,5 +1,90 @@
-import colours from './colors.json';
+export const colors = {
+	transparent: "transparent",
+	white: {
+		default: "#FFFFFF",
+		offWhite: "#F8F8F8"
+	},
+	black: {
+		default: "#000000",
+		blackBlue: "#221924"
+	},
+	yellow: {
+		"100": "#FFF9EA",
+		"200": "#FFEBBB",
+		"300": "#FFDE8B",
+		"400": "#FFD05C",
+		"500": "#FFC32D",
+		"600": "#DDA61B",
+		"700": "#BB890C",
+		"800": "#996E02",
+		"900": "#775500"
+	},
+	orange: {
+		"100": "#FFF2E6",
+		"200": "#FFDABA",
+		"300": "#FFC38E",
+		"400": "#FFAB62",
+		"500": "#FF960B",
+		"600": "#FF7C0A",
+		"700": "#F45825",
+		"800": "#AD5100",
+		"900": "#853E00"
+	},
+	red: {
+		"100": "#FFE8E9",
+		"200": "#FFBEC3",
+		"300": "#FF949C",
+		"400": "#FF6A76",
+		"500": "#FF404F",
+		"600": "#F81627",
+		"700": "#CF0010",
+		"800": "#A6000D",
+		"900": "#7D000A"
+	},
+	pink: {
+		"100": "#FFEBF3",
+		"200": "#FFBEDA",
+		"300": "#FF91C0",
+		"400": "#FF64A7",
+		"500": "#FF378D",
+		"600": "#E62478",
+		"700": "#C41360",
+		"800": "#A2064A",
+		"900": "#800037"
+	},
+	blue: {
+		"100": "#EAF8FF",
+		"200": "#BBEAFF",
+		"300": "#8CDCFF",
+		"400": "#5ACFFF",
+		"500": "#2FC0FF",
+		"600": "#1DA3DD",
+		"700": "#0081B9",
+		"800": "#036C99",
+		"900": "#005377"
+	},
+	green: {
+		"100": "#f0fff1",
+		"200": "#caeac1",
+		"300": "#9dd595",
+		"400": "#6ec069",
+		"500": "#32aa3c",
+		"600": "#408548",
+		"700": "#1a6629",
+		"800": "#0e4620",
+		"900": "#042916"
+	},
+	grey: {
+		"100": "#F2F2F2",
+		"200": "#DEDEDE",
+		"300": "#CFCFCF",
+		"400": "#BABABA",
+		"500": "#A6A6A6",
+		"600": "#928F8F",
+		"700": "#6F6F6F",
+		"800": "#575757",
+		"900": "#3F3F3F"
+	}
+} as const;
 
-export const colors: typeof colours = colours;
-
-export type ColorKey = keyof typeof colours;
+export type ColorKey = keyof typeof colors;
