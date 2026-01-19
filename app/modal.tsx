@@ -9,7 +9,7 @@ import { AppText } from "@/components/AppText";
 // TODO: Replace colors with theme
 export const ModalScreen = () => {
   return (
-    <AppView className="flex-1 items-center justify-center">
+    <AppView variant="bgScreen" className="flex-1 items-center justify-center">
       <AppText className="text-xl font-bold">Modal</AppText>
       <AppView
         className="my-8 w-4/5 h-px"

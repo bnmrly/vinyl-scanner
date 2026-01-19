@@ -5,7 +5,6 @@ import { Image } from "expo-image";
 import { twMerge } from "@/utilities/utilities";
 
 // Theme
-import { Theme } from '@/designSystem/theme/appTheme';
 
 // UI
 import { AppView } from "./AppView";
@@ -21,7 +20,7 @@ type CardProps = {
   titleWrapperClassName?: ClassNameValue;
 };
 
-const baseCardClassName = "border-8 border-blue-500";
+const baseCardClassName = "border-8";
 
 const baseTextClassName = "";
 
@@ -33,13 +32,13 @@ export const Card = ({
 }: CardProps) => {
 
   return (
-    <AppView className={twMerge([baseCardClassName, cardWrapperClassName])}>
+    <AppView variant="bgCard" className={twMerge([baseCardClassName, cardWrapperClassName])}>
       <Image
         source={{ uri: url }}
         style={{ width: 200, height: 200, marginBottom: 20 }}
       />
       <AppView className="">
-        <AppText lightColor={Theme.light.textBrand} darkColor={Theme.dark.textBrand} className="">{title}</AppText>
+        <AppText variant="brand" className="">{title}</AppText>
       </AppView>
     </AppView>
   );

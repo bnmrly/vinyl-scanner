@@ -1,6 +1,8 @@
 // 3rd party
 import { CameraView } from "expo-camera";
-import { Button, View } from "react-native";
+
+
+
 
 // Hooks and utilities
 import { useScanBarcode } from "@/hooks/useScanBarcode";
@@ -9,6 +11,7 @@ import { useScanBarcode } from "@/hooks/useScanBarcode";
 import { AppView } from "./AppView";
 import { AppText } from "./AppText";
 import { Card } from "./Card";
+import { Button } from "./Button";
 
 
 export const Scanner = () => {
@@ -26,26 +29,24 @@ export const Scanner = () => {
 
   if (!permission.granted) {
     return (
-      <AppView> className="flex-1 justify-center items-center bg-yellow-500 px-4">
-        <AppText className="text-center pb-2 text-black">
-          We need your permission to use the camera
-        </AppText>
+      <AppView variant="bgSection" className="flex-1 justify-center items-center px-4">
+        <AppText className="text-center pb-2">We need your permission to use the camera</AppText>
         {/* <Button onPress={requestPermission} title="Grant permission" /> */}
       </AppView>
     );
   }
 
   return (
-    <AppView className="flex-1 bg-green-500">
+    <AppView variant="bgScreen" className="flex-1">
       {/* NOT SCANNED → SHOW CAMERA */}
       {!scannedData && (
-        <AppView className="flex-1 bg-blue-500">
+        <AppView className="flex-1">
           <CameraView
             style={{ flex: 1 }}
             onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
           />
 
-          <AppView className="border-4 border-red-500">
+          <AppView variant="bgCard" className="border-4">
             <AppText className="text-lg px-4 py-2">SCAN SOMETHING...</AppText>
           </AppView>
         </AppView>
@@ -54,7 +55,7 @@ export const Scanner = () => {
       {/* TODO: Create themed button */}
   
       {scannedData && (
-        <AppView className="flex-1 bg-orange-500 justify-center items-center">
+        <AppView variant="bgSection" className="flex-1 justify-center items-center">
           <Card
             url={scannedData?.cover_image}
             title={scannedData?.title}

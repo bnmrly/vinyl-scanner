@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 
-import { useColorScheme as systemUseColorScheme } from "react-native";
+import { useColorScheme as systemUseColorScheme, View } from "react-native";
 
 type Theme = "light" | "dark";
 
@@ -41,7 +41,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+      {/* Root view with dark class enables Tailwind dark: variants globally */}
+      <View className={theme === 'dark' ? 'dark' : ''} style={{ flex: 1 }}>
+        {children}
+      </View>
     </ThemeContext.Provider>
   );
 };

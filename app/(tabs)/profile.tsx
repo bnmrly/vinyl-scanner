@@ -12,7 +12,7 @@ export const Profile = () => {
   const { theme, toggleTheme } = useToggleTheme();
 
   return (
-   <AppView className="flex-1 px-4 py-6">
+  <AppView variant="bgScreen" className="flex-1 px-4 py-6">
       <AppText className="mb-4">View Profile here</AppText>
       <Pressable
         onPress={toggleTheme}
