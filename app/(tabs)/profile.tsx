@@ -7,6 +7,7 @@ import { useToggleTheme } from "@/hooks/useToggleTheme";
 // UI
 import { AppView } from "@/components/AppView";
 import { AppText } from "@/components/AppText";
+import { Button } from "@/components/Button";
 
 export const Profile = () => {
   const { theme, toggleTheme } = useToggleTheme();
@@ -14,15 +15,14 @@ export const Profile = () => {
   return (
   <AppView variant="bgScreen" className="flex-1 px-4 py-6">
       <AppText className="mb-4">View Profile here</AppText>
-      <Pressable
+      <Button
         onPress={toggleTheme}
-        className="rounded-lg bg-blue-600 px-4 py-3"
-        accessibilityLabel="Toggle theme"
+        title={` Toggle Theme (current: ${theme})`}
       >
         <AppText className="text-white text-center">
           Toggle Theme (current: {theme})
         </AppText>
-      </Pressable>
+      </Button>
     </AppView >
   );
 };

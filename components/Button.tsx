@@ -63,7 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
       {...otherProps}
     >
       <AppText variant={textVariantMap[variant]} className="font-semibold">
-        --{title}
+        {title}
       </AppText>
     </Pressable>
   );
