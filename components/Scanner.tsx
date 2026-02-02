@@ -51,14 +51,17 @@ export const Scanner = () => {
       {/* TODO: Create themed button */}
   
       {scannedData && (
-        <AppView variant="bgSection" className="flex-1 items-center">
+        <AppView variant="bgCard" className="flex-1 items-center border border-red-500">
           <Card
             url={scannedData?.cover_image}
             title={scannedData?.title}
             cardWrapperClassName="p-4"
             titleWrapperClassName=""
           />
-          <Button onPress={handleResetScan} title="Scan again" />
+          <AppView className="mt-4">
+            <Button onPress={handleResetScan} title="Save to collection" />
+            <Button variant="secondary" className="mt-6" onPress={handleResetScan} title="Scan again" />
+          </AppView>
         </AppView>
       )}
     </AppView>

@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 
 // Hooks and utilities
 import { twMerge } from "@/utilities/utilities";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 // Theme
 
@@ -30,14 +31,29 @@ export const Card = ({
   cardWrapperClassName,
   titleWrapperClassName,
 }: CardProps) => {
+  const shadowColor = useThemeColor({}, "shadow");
 
   return (
-    <AppView variant="bgCard" className={twMerge([baseCardClassName, cardWrapperClassName])}>
-      <Image
-        source={{ uri: url }}
-        style={{ width: 300, height: 300, marginBottom: 20 }}
-      />
-      <AppView className="">
+    <AppView variant="bgCard" className={twMerge([baseCardClassName, cardWrapperClassName, "items-center"])}>
+      <AppView
+        variant="transparent"
+        className="w-[300px] h-[300px] mb-5 rounded"
+        style={{
+          // iOS shadow
+          shadowColor: shadowColor,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 8,
+          // Android shadow
+          elevation: 8,
+        }}
+      >
+        <Image
+          source={{ uri: url }}
+          style={{ width: "100%", height: "100%", borderRadius: 8 }}
+        />
+      </AppView>
+      <AppView className="items-center w-full">
         <AppText variant="brand" className="">{title}</AppText>
       </AppView>
     </AppView>

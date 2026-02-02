@@ -22,6 +22,7 @@ export const Theme = {
     // UI Elements
     tint: colors.orange[300],
     border: colors.grey["200"],
+    shadow: colors.grey["900"],
     // Tabs
     tabIconDefault: colors.grey[600],
     tabIconSelected: colors.orange[300],
@@ -37,7 +38,8 @@ export const Theme = {
     textBrand: colors.orange["500"],
     // UI Elements
     tint: colors.red[200],
-    border: colors.grey["700"],  
+    border: colors.grey["700"],
+    shadow: colors.black.default,
     // Tabs
     tabIconDefault: colors.grey[600],
     tabIconSelected: colors.red[200],
