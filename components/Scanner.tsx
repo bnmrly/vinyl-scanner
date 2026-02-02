@@ -2,8 +2,6 @@
 import { CameraView } from "expo-camera";
 
 
-
-
 // Hooks and utilities
 import { useScanBarcode } from "@/hooks/useScanBarcode";
 
@@ -23,13 +21,13 @@ export const Scanner = () => {
     handleBarCodeScanned,
     handleResetScan,
   } = useScanBarcode();
-  console.log("🚀 --- Scanner --- scannedData:", scannedData);
+
 
   if (!permission) return null;
 
   if (!permission.granted) {
     return (
-      <AppView variant="bgSection" className="flex-1 justify-center items-center px-4">
+      <AppView variant="bgCard" className="flex-1 justify-center items-center px-4">
         <AppText className="text-center pb-2">We need your permission to use the camera</AppText>
         {/* <Button onPress={requestPermission} title="Grant permission" /> */}
       </AppView>
@@ -37,32 +35,30 @@ export const Scanner = () => {
   }
 
   return (
-    <AppView variant="bgScreen" className="flex-1">
-      {/* NOT SCANNED → SHOW CAMERA */}
+    <AppView variant="bgCard" className="flex-1">
       {!scannedData && (
-        <AppView className="flex-1">
-          <CameraView
-            style={{ flex: 1 }}
+        <AppView variant="bgSection" className="flex-1">
+          <AppView variant="bgCard" className="items-center flex-1 pt-4">
+               <AppText className="text-md mt-1 mb-8">Focus barcode within frame</AppText>
+             <CameraView
+            style={{ height: "25%", width: "70%", borderRadius: 15 }}
             onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
           />
-
-          <AppView variant="bgCard" className="border-4">
-            <AppText className="text-lg px-4 py-2">SCAN SOMETHING...</AppText>
-          </AppView>
+            </AppView>
         </AppView>
       )}
 
       {/* TODO: Create themed button */}
   
       {scannedData && (
-        <AppView variant="bgSection" className="flex-1 justify-center items-center">
+        <AppView variant="bgSection" className="flex-1 items-center">
           <Card
             url={scannedData?.cover_image}
             title={scannedData?.title}
-            cardWrapperClassName="border-yellow-500"
-            titleWrapperClassName="text-blue-500"
+            cardWrapperClassName="p-4"
+            titleWrapperClassName=""
           />
-          <Button onPress={handleResetScan} title="Scan reset" />
+          <Button onPress={handleResetScan} title="Scan again" />
         </AppView>
       )}
     </AppView>

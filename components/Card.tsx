@@ -20,7 +20,7 @@ type CardProps = {
   titleWrapperClassName?: ClassNameValue;
 };
 
-const baseCardClassName = "border-8";
+const baseCardClassName = "";
 
 const baseTextClassName = "";
 
@@ -35,7 +35,7 @@ export const Card = ({
     <AppView variant="bgCard" className={twMerge([baseCardClassName, cardWrapperClassName])}>
       <Image
         source={{ uri: url }}
-        style={{ width: 200, height: 200, marginBottom: 20 }}
+        style={{ width: 300, height: 300, marginBottom: 20 }}
       />
       <AppView className="">
         <AppText variant="brand" className="">{title}</AppText>
