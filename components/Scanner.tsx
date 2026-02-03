@@ -23,13 +23,13 @@ export const Scanner = () => {
     handleResetScan,
   } = useScanBarcode();
 
-  const existingVinyl = useAppSelector((state) =>
+  const recordInCollection = useAppSelector((state) =>
     scannedData ? selectVinylById(state, scannedData.id.toString()) : undefined,
   );
-  const isAlreadyInCollection = !!existingVinyl;
+  // const isAlreadyInCollection = !!existingVinyl;
 
   const handleSave = () => {
-    if (scannedData && !isAlreadyInCollection) {
+    if (scannedData && !recordInCollection) {
       dispatch(
         addVinyl({
           id: scannedData.id.toString(),
@@ -86,20 +86,21 @@ export const Scanner = () => {
             cardWrapperClassName="p-4"
             titleWrapperClassName=""
           />
-          {isAlreadyInCollection && (
-            <AppText className="mt-4 text-center px-4">
-              Item is already in collection
-            </AppText>
-          )}
+
           <AppView className="mt-4">
             <Button
               onPress={handleSave}
               title="Save to collection"
-              disabled={isAlreadyInCollection}
+              disabled={!!recordInCollection}
             />
+            {recordInCollection && (
+              <AppText variant="error" className="mt-1 text-center px-4">
+                Item is already in collection
+              </AppText>
+            )}
             <Button
               variant="secondary"
-              className="mt-6"
+              className="mt-8"
               onPress={handleResetScan}
               title="Scan again"
             />

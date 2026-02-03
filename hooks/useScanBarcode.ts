@@ -6,14 +6,21 @@ type BarCodeData = {
   type: string;
 };
 
+export type DiscogsResult = {
+  id: number;
+  title: string;
+  cover_image: string;
+  // Add other fields as needed from Discogs API
+};
+
 // TODO: LINK USER TO SETTINGS FOR SAD PATH
 
-// TODO: Currently settimg scanned data to be just the first result in the array  for ease
+// TODO: Currently setting scanned data to be just the first result in the array for ease
 
 export const useScanBarcode = () => {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
-  const [scannedData, setScannedData] = useState<any | null>(null); // TODO: FIX ANY TYPE
+  const [scannedData, setScannedData] = useState<DiscogsResult | null>(null);
 
   const handleBarCodeScanned = useCallback(
     async ({ data, type }: BarCodeData) => {
