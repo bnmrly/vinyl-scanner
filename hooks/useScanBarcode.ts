@@ -38,12 +38,10 @@ export const useScanBarcode = () => {
         console.log("err", err);
       }
 
-      console.log("barcode scanned, data and type is:", data, type);
+      // console.log("barcode scanned, data and type is:", data, type);
     },
-    []
+    [],
   );
-
-  console.log("🚀 --- HOOK --- scannedData IN HOOK:", scannedData);
 
   const handleResetScan = useCallback(() => {
     setScanned(false);

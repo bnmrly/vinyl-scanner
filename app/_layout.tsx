@@ -10,12 +10,16 @@ import * as SplashScreen from "expo-splash-screen";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Provider } from "react-redux";
 
 // Context
 import {
   ThemeProvider as AppThemeProvider,
   useTheme as useAppTheme,
 } from "@/context/ThemeContext";
+
+// Store
+import { store } from "@/store";
 
 // Styling
 import "../global.css";
@@ -53,9 +57,11 @@ export const RootLayout = () => {
 
 const RootLayoutNav = () => {
   return (
-    <AppThemeProvider>
-      <Nav />
-    </AppThemeProvider>
+    <Provider store={store}>
+      <AppThemeProvider>
+        <Nav />
+      </AppThemeProvider>
+    </Provider>
   );
 };
 

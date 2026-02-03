@@ -5,5 +5,11 @@
     "source.fixAll.eslint": "never",
     "source.fixAll": "never"
   },
-  "eslint.format.enable": true
+  "eslint.format.enable": true,
+  "turboConsoleLog.logMessagePrefix": "",
+  "turboConsoleLog.addSemicolonInTheEnd": false,
+  "turboConsoleLog.includeFileNameAndLineNum": false,
+  "turboConsoleLog.delimiterInsideMessage": "",
+  "turboConsoleLog.dynamicFreemiumPanel": true,
+  "turboConsoleLog.isTurboTelemetryEnabled": false
 }
