@@ -22,7 +22,12 @@ const collectionSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; title: string; coverImage: string }>,
     ) => {
-      state.items.push(action.payload);
+      const itemInCollection = state.items.some(
+        (item) => item.id === action.payload.id,
+      );
+      if (!itemInCollection) {
+        state.items.push(action.payload);
+      }
     },
     removeVinyl: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);

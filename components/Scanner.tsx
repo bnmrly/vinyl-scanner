@@ -3,8 +3,8 @@ import { CameraView } from "expo-camera";
 
 // Hooks and utilities
 import { useScanBarcode } from "@/hooks/useScanBarcode";
-import { useAppDispatch } from "@/store/hooks";
-import { addVinyl } from "@/store/slices/collectionSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addVinyl, selectVinylById } from "@/store/slices/collectionSlice";
 
 //UI
 import { AppView } from "./AppView";
@@ -23,8 +23,13 @@ export const Scanner = () => {
     handleResetScan,
   } = useScanBarcode();
 
+  const existingVinyl = useAppSelector((state) =>
+    scannedData ? selectVinylById(state, scannedData.id.toString()) : undefined,
+  );
+  const isAlreadyInCollection = !!existingVinyl;
+
   const handleSave = () => {
-    if (scannedData) {
+    if (scannedData && !isAlreadyInCollection) {
       dispatch(
         addVinyl({
           id: scannedData.id.toString(),
@@ -81,8 +86,17 @@ export const Scanner = () => {
             cardWrapperClassName="p-4"
             titleWrapperClassName=""
           />
+          {isAlreadyInCollection && (
+            <AppText className="mt-4 text-center px-4">
+              Item is already in collection
+            </AppText>
+          )}
           <AppView className="mt-4">
-            <Button onPress={handleSave} title="Save to collection" />
+            <Button
+              onPress={handleSave}
+              title="Save to collection"
+              disabled={isAlreadyInCollection}
+            />
             <Button
               variant="secondary"
               className="mt-6"
