@@ -1,8 +1,8 @@
-import { colors } from '@/designSystem/tokens/colors';
+import { colors } from "@/designSystem/tokens/colors";
 
 /**
  * These semantic names map directly to Tailwind utility classes.
- * 
+ *
  * Usage:
  * - Components use Tailwind classes like `bg-screen`, `text-content`, `border-default`
  * - The `dark` class on root enables `dark:` variants automatically
@@ -19,6 +19,7 @@ export const Theme = {
     textContent: colors.black.blackBlue,
     textMuted: colors.grey["600"],
     textBrand: colors.orange["500"],
+    textError: colors.red["500"],
     // UI Elements
     tint: colors.orange[300],
     border: colors.grey["200"],
@@ -36,6 +37,7 @@ export const Theme = {
     textContent: colors.grey["100"],
     textMuted: colors.grey["300"],
     textBrand: colors.orange["500"],
+    textError: colors.red["400"],
     // UI Elements
     tint: colors.red[200],
     border: colors.grey["700"],
