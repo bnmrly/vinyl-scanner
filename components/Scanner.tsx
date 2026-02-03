@@ -76,10 +76,7 @@ export const Scanner = () => {
       {/* TODO: Create themed button */}
 
       {scannedData && (
-        <AppView
-          variant="bgCard"
-          className="flex-1 items-center border border-red-500"
-        >
+        <AppView variant="bgCard" className="flex-1 items-center">
           <Card
             url={scannedData?.cover_image}
             title={scannedData?.title}
