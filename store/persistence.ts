@@ -3,14 +3,30 @@ import type { VinylItem } from "./slices/collectionSlice";
 
 const COLLECTION_STORAGE_KEY = "vinylScannerCollection";
 
-const isVinylItem = (value: unknown): value is VinylItem => {
-  if (typeof value !== "object" || value === null) return false;
+const toVinylItem = (value: unknown): VinylItem | null => {
+  if (typeof value !== "object" || value === null) return null;
+
   const vinyl = value as Record<string, unknown>;
-  return (
-    typeof vinyl.id === "string" &&
-    typeof vinyl.title === "string" &&
-    typeof vinyl.coverImage === "string"
-  );
+
+  if (
+    typeof vinyl.id !== "string" ||
+    typeof vinyl.title !== "string" ||
+    typeof vinyl.coverImage !== "string"
+  ) {
+    return null;
+  }
+
+  const artist =
+    typeof vinyl.artist === "string" && vinyl.artist.trim().length > 0
+      ? vinyl.artist
+      : "Unknown artist";
+
+  return {
+    id: vinyl.id,
+    artist,
+    title: vinyl.title,
+    coverImage: vinyl.coverImage,
+  };
 };
 
 export const loadPersistedCollection = async (): Promise<VinylItem[]> => {
@@ -24,7 +40,9 @@ export const loadPersistedCollection = async (): Promise<VinylItem[]> => {
 
     if (!Array.isArray(parsed)) return [];
 
-    return parsed.filter(isVinylItem);
+    return parsed
+      .map((entry) => toVinylItem(entry))
+      .filter((entry): entry is VinylItem => entry !== null);
   } catch {
     return [];
   }
@@ -60,7 +78,9 @@ export const logLocalStorageCollection = async (): Promise<void> => {
       return;
     }
 
-    const vinylItems = parsed.filter(isVinylItem);
+    const vinylItems = parsed
+      .map((entry) => toVinylItem(entry))
+      .filter((entry): entry is VinylItem => entry !== null);
     console.log("Stored vinylScannerCollection:", vinylItems);
   } catch (error) {
     console.warn("Failed to read Stored vinylScannerCollection", error);

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface VinylItem {
   id: string;
+  artist: string;
   title: string;
   coverImage: string;
 }
@@ -23,7 +24,12 @@ const collectionSlice = createSlice({
     },
     addVinyl: (
       state,
-      action: PayloadAction<{ id: string; title: string; coverImage: string }>,
+      action: PayloadAction<{
+        id: string;
+        artist: string;
+        title: string;
+        coverImage: string;
+      }>,
     ) => {
       const itemInCollection = state.items.some(
         (item) => item.id === action.payload.id,

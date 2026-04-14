@@ -13,6 +13,23 @@ import { AppText } from "./AppText";
 import { Card } from "./Card";
 import { Button } from "./Button";
 
+// Artist name cannot be reliably be accessed from the api response
+const splitArtistAndTitle = (discogsTitle: string) => {
+  const [artistPart, titlePart] = discogsTitle.split(" - ", 2);
+
+  if (!titlePart) {
+    return {
+      artist: "Unknown artist",
+      title: discogsTitle,
+    };
+  }
+
+  return {
+    artist: artistPart.trim() || "Unknown artist",
+    title: titlePart.trim() || discogsTitle,
+  };
+};
+
 export const Scanner = () => {
   const dispatch = useAppDispatch();
   const {
@@ -34,10 +51,13 @@ export const Scanner = () => {
 
   const handleSave = () => {
     if (scannedData && !recordInCollection) {
+      const { artist, title } = splitArtistAndTitle(scannedData.title);
+
       dispatch(
         addVinyl({
           id: scannedData.id.toString(),
-          title: scannedData.title,
+          artist,
+          title,
           coverImage: scannedData.cover_image,
         }),
       );
@@ -78,27 +98,46 @@ export const Scanner = () => {
       )}
 
       {scanned && isLoading && (
-        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+        <AppView
+          variant="bgCard"
+          className="flex-1 items-center justify-center px-4"
+        >
           <ActivityIndicator size="large" />
-          <AppText className="mt-4 text-center">Looking up record details...</AppText>
+          <AppText className="mt-4 text-center">
+            Looking up record details...
+          </AppText>
         </AppView>
       )}
 
       {scanned && !isLoading && scanErrorMessage && (
-        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+        <AppView
+          variant="bgCard"
+          className="flex-1 items-center justify-center px-4"
+        >
           <AppText variant="error" className="text-center">
             {scanErrorMessage}
           </AppText>
-          <Button className="mt-6" onPress={handleResetScan} title="Try another scan" />
+          <Button
+            className="mt-6"
+            onPress={handleResetScan}
+            title="Try another scan"
+          />
         </AppView>
       )}
 
       {scanned && !isLoading && hasNoResults && (
-        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+        <AppView
+          variant="bgCard"
+          className="flex-1 items-center justify-center px-4"
+        >
           <AppText className="text-center">
             No matching record found for that barcode.
           </AppText>
-          <Button className="mt-6" onPress={handleResetScan} title="Scan again" />
+          <Button
+            className="mt-6"
+            onPress={handleResetScan}
+            title="Scan again"
+          />
         </AppView>
       )}
 

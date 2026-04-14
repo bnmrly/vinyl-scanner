@@ -8,7 +8,7 @@ import { AppText } from "@/components/AppText";
 import { CollectionCardSimple } from "@/components/CollectionCardSimple";
 import { CollectionCardDetailed } from "@/components/CollectionCardDetailed";
 import { useAppSelector } from "@/store/hooks";
-import { selectAllVinyl, VinylItem } from "@/store/slices/collectionSlice";
+import { selectAllVinyl } from "@/store/slices/collectionSlice";
 import { logLocalStorageCollection } from "@/store/persistence";
 import { useEffect, useState } from "react";
 
@@ -82,7 +82,11 @@ export const Collection = () => {
           return isSimpleViewMode ? (
             <CollectionCardSimple coverImage={record.coverImage} />
           ) : (
-            <CollectionCardDetailed coverImage={record.coverImage} />
+            <CollectionCardDetailed
+              coverImage={record.coverImage}
+              title={record.title}
+              artist={record.artist}
+            />
           );
         }}
       />
