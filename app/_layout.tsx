@@ -1,5 +1,5 @@
 // 3rd party
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   DarkTheme,
   DefaultTheme,
@@ -20,6 +20,8 @@ import {
 
 // Store
 import { store } from "@/store";
+import { persistCollection, loadPersistedCollection } from "@/store/persistence";
+import { setCollection } from "@/store/slices/collectionSlice";
 
 // Styling
 import "../global.css";
@@ -56,6 +58,41 @@ export const RootLayout = () => {
 };
 
 const RootLayoutNav = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const hydrateCollection = async () => {
+      const items = await loadPersistedCollection();
+      store.dispatch(setCollection(items));
+      if (isMounted) setIsHydrated(true);
+    };
+
+    hydrateCollection();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    const unsubscribe = store.subscribe(() => {
+      const items = store.getState().collection.items;
+      const persistItems = async () => {
+        await persistCollection(items);
+      };
+
+      persistItems();
+    });
+
+    return unsubscribe;
+  }, [isHydrated]);
+
+  if (!isHydrated) return null;
+
   return (
     <Provider store={store}>
       <AppThemeProvider>

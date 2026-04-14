@@ -18,6 +18,9 @@ const collectionSlice = createSlice({
   name: "collection",
   initialState,
   reducers: {
+    setCollection: (state, action: PayloadAction<VinylItem[]>) => {
+      state.items = action.payload;
+    },
     addVinyl: (
       state,
       action: PayloadAction<{ id: string; title: string; coverImage: string }>,
@@ -35,7 +38,7 @@ const collectionSlice = createSlice({
   },
 });
 
-export const { addVinyl, removeVinyl } = collectionSlice.actions;
+export const { setCollection, addVinyl, removeVinyl } = collectionSlice.actions;
 
 // Selectors
 export const selectAllVinyl = (state: { collection: CollectionState }) =>

@@ -9,9 +9,8 @@ import { CollectionCardSimple } from "@/components/CollectionCardSimple";
 import { CollectionCardDetailed } from "@/components/CollectionCardDetailed";
 import { useAppSelector } from "@/store/hooks";
 import { selectAllVinyl, VinylItem } from "@/store/slices/collectionSlice";
-import { useState } from "react";
-
-// TODO: ASYNC STORAGE
+import { logLocalStorageCollection } from "@/store/persistence";
+import { useEffect, useState } from "react";
 
 export enum ViewMode {
   Simple = "simple",
@@ -24,6 +23,16 @@ export const Collection = () => {
   console.log("🚀 --- Collection --- allVinyl:", allVinyl);
 
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Simple);
+
+  useEffect(() => {
+    if (!__DEV__) return;
+
+    const logCollection = async () => {
+      await logLocalStorageCollection();
+    };
+
+    logCollection();
+  }, []);
 
   const isSimpleViewMode = viewMode === ViewMode.Simple;
 
