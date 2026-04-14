@@ -1,5 +1,6 @@
 // 3rd party
 import { CameraView } from "expo-camera";
+import { ActivityIndicator } from "react-native";
 
 // Hooks and utilities
 import { useScanBarcode } from "@/hooks/useScanBarcode";
@@ -19,6 +20,9 @@ export const Scanner = () => {
     requestPermission,
     scanned,
     scannedData,
+    isLoading,
+    scanErrorMessage,
+    hasNoResults,
     handleBarCodeScanned,
     handleResetScan,
   } = useScanBarcode();
@@ -59,7 +63,7 @@ export const Scanner = () => {
 
   return (
     <AppView variant="bgCard" className="flex-1">
-      {!scannedData && (
+      {!scanned && (
         <AppView variant="bgSection" className="flex-1">
           <AppView variant="bgCard" className="items-center flex-1 pt-4">
             <AppText className="text-md mt-1 mb-8">
@@ -73,9 +77,32 @@ export const Scanner = () => {
         </AppView>
       )}
 
-      {/* TODO: Create themed button */}
+      {scanned && isLoading && (
+        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+          <ActivityIndicator size="large" />
+          <AppText className="mt-4 text-center">Looking up record details...</AppText>
+        </AppView>
+      )}
 
-      {scannedData && (
+      {scanned && !isLoading && scanErrorMessage && (
+        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+          <AppText variant="error" className="text-center">
+            {scanErrorMessage}
+          </AppText>
+          <Button className="mt-6" onPress={handleResetScan} title="Try another scan" />
+        </AppView>
+      )}
+
+      {scanned && !isLoading && hasNoResults && (
+        <AppView variant="bgCard" className="flex-1 items-center justify-center px-4">
+          <AppText className="text-center">
+            No matching record found for that barcode.
+          </AppText>
+          <Button className="mt-6" onPress={handleResetScan} title="Scan again" />
+        </AppView>
+      )}
+
+      {scanned && !isLoading && scannedData && (
         <AppView variant="bgCard" className="flex-1 items-center">
           <Card
             url={scannedData?.cover_image}
