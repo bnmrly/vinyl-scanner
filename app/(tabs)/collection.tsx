@@ -7,8 +7,8 @@ import { AppView } from "@/components/AppView";
 import { AppText } from "@/components/AppText";
 import { CollectionCardSimple } from "@/components/CollectionCardSimple";
 import { CollectionCardDetailed } from "@/components/CollectionCardDetailed";
-import { useAppSelector } from "@/store/hooks";
-import { selectAllVinyl } from "@/store/slices/collectionSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { removeVinyl, selectAllVinyl } from "@/store/slices/collectionSlice";
 import { logLocalStorageCollection } from "@/store/persistence";
 import { useEffect, useState } from "react";
 
@@ -18,6 +18,7 @@ export enum ViewMode {
 }
 
 export const Collection = () => {
+  const dispatch = useAppDispatch();
   const allVinyl = useAppSelector(selectAllVinyl);
 
   console.log("🚀 --- Collection --- allVinyl:", allVinyl);
@@ -39,6 +40,10 @@ export const Collection = () => {
   const handleViewMode = (mode: ViewMode) => {
     if (viewMode === mode) return;
     setViewMode(mode);
+  };
+
+  const handleDelete = (id: string) => {
+    dispatch(removeVinyl(id));
   };
 
   return (
@@ -80,12 +85,16 @@ export const Collection = () => {
         renderItem={({ item: record }) => {
           console.log("🚀 _ record:", record);
           return isSimpleViewMode ? (
-            <CollectionCardSimple coverImage={record.coverImage} />
+            <CollectionCardSimple
+              coverImage={record.coverImage}
+              handleDelete={() => handleDelete(record.id)}
+            />
           ) : (
             <CollectionCardDetailed
               coverImage={record.coverImage}
               title={record.title}
               artist={record.artist}
+              handleDelete={() => handleDelete(record.id)}
             />
           );
         }}
