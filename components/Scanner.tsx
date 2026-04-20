@@ -1,6 +1,6 @@
 // 3rd party
 import { CameraView } from "expo-camera";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Linking } from "react-native";
 
 // Hooks and utilities
 import { useScanBarcode } from "@/hooks/useScanBarcode";
@@ -48,15 +48,28 @@ export const Scanner = () => {
   if (!permission) return null;
 
   if (!permission.granted) {
+    const canAskAgain = permission.canAskAgain;
+
+    const handleOpenSettings = () => Linking.openSettings();
+
     return (
       <AppView
         variant="bgCard"
         className="flex-1 justify-center items-center px-4"
       >
-        <AppText className="text-center pb-2">
-          We need your permission to use the camera
+        <AppText className="text-center pb-2 text-lg font-semibold">
+          Camera access required
         </AppText>
-        {/* <Button onPress={requestPermission} title="Grant permission" /> */}
+        <AppText variant="muted" className="text-center">
+          {canAskAgain
+            ? "Allow camera access to scan vinyl barcodes."
+            : "Camera access is blocked. Enable it in Settings to continue scanning."}
+        </AppText>
+        {canAskAgain ? (
+          <Button className="mt-6" onPress={requestPermission} title="Grant permission" />
+        ) : (
+          <Button className="mt-6" onPress={handleOpenSettings} title="Open settings" />
+        )}
       </AppView>
     );
   }

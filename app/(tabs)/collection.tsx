@@ -27,12 +27,7 @@ export const Collection = () => {
 
   useEffect(() => {
     if (!__DEV__) return;
-
-    const logCollection = async () => {
-      await logLocalStorageCollection();
-    };
-
-    logCollection();
+    logLocalStorageCollection();
   }, []);
 
   const isSimpleViewMode = viewMode === ViewMode.Simple;

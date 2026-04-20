@@ -1,5 +1,6 @@
 import { useCameraPermissions } from "expo-camera";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AppState } from "react-native";
 
 type BarCodeData = {
   data: string;
@@ -39,20 +40,43 @@ const getDiscogsArtist = (release: DiscogsReleaseDetails): string => {
 // TODO: Currently setting scanned data to be just the first result in the array for ease
 
 export const useScanBarcode = () => {
-  const [permission, requestPermission] = useCameraPermissions();
+  const [permission, requestPermission, getPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
   const [scannedData, setScannedData] = useState<DiscogsResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [scanErrorMessage, setScanErrorMessage] = useState<string | null>(null);
   const [hasNoResults, setHasNoResults] = useState(false);
+  const isScanInFlight = useRef(false);
+
+  const refreshCameraPermission = useCallback(
+    () =>
+      getPermission().catch(() => {
+        // No-op: permission refresh failures should not crash scan flow.
+      }),
+    [getPermission],
+  );
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", (nextState) => {
+      if (nextState === "active") {
+        refreshCameraPermission();
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, [refreshCameraPermission]);
 
   const handleBarCodeScanned = useCallback(
     async ({ data }: BarCodeData) => {
       const barcodeData = data?.trim();
       // Some camera callbacks can fire without a usable payload first; ignore these.
       if (!barcodeData) return;
+      if (isScanInFlight.current) return;
 
       // Start a fresh scan cycle and clear any previous result/error UI state.
+      isScanInFlight.current = true;
       setScanned(true);
       setIsLoading(true);
       setScanErrorMessage(null);
@@ -126,6 +150,7 @@ export const useScanBarcode = () => {
 
         setScanErrorMessage("Could not fetch record data. Please try again.");
       } finally {
+        isScanInFlight.current = false;
         setIsLoading(false);
       }
     },

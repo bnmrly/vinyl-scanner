@@ -81,11 +81,7 @@ const RootLayoutNav = () => {
 
     const unsubscribe = store.subscribe(() => {
       const items = store.getState().collection.items;
-      const persistItems = async () => {
-        await persistCollection(items);
-      };
-
-      persistItems();
+      persistCollection(items);
     });
 
     return unsubscribe;
