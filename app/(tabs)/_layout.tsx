@@ -37,7 +37,7 @@ export const TabLayout = () => {
                   <FontAwesome
                     name="info-circle"
                     size={25}
-                    color={Theme[colorScheme ?? "light"].text}
+                    color={Theme[colorScheme ?? "light"].textContent}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
