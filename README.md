@@ -1,42 +1,68 @@
 # Vinyl Scanner
 
-A simple React Native app built with Expo to scan barcodes of vinyl records and fetch metadata from the Discogs API. This project is a bare bones MVP designed to demonstrate React Native and Expo capabilities, and to serve as a starting point for future development.
+React Native app (Expo + Expo Router) for scanning vinyl barcodes, fetching Discogs metadata, and managing a local collection.
 
-## Features
+## Current MVP Features
 
-- **Barcode scanning:** Open the app and scan vinyl record barcodes using the device camera.  
-- **Discogs API integration:** Automatically fetch record details after scanning.  
-- **Collection view:** Browse your scanned records stored locally.  
-- **Tabbed navigation:** Easy access to different app sections via bottom tabs.  
-- **Profile placeholder:** A simple profile screen for future user management.
+- Scan vinyl barcodes with camera.
+- Fetch Discogs results by barcode and enrich with release details.
+- Save records to Redux collection.
+- Prevent duplicate records.
+- Delete records from collection (simple and detailed views).
+- Toggle collection layout:
+  - simple two-column grid
+  - detailed single-column cards
+- Persist collection to local storage (`AsyncStorage`) across app restarts.
+- Scanner UX states:
+  - loading
+  - API error
+  - no-result
+- Camera permission UX:
+  - grant permission CTA
+  - open settings CTA when permission is blocked
 
-## Tech stack
+## Tech Stack
 
-- React Native with Expo  
-- Nativewind for styling  
-- Material UI?  
-- Expo Camera for barcode scanning  
-- React Navigation with bottom tabs  
-- Redux or AsyncStorage for local state management  
-- Discogs API for record metadata
+- Expo + React Native
+- Expo Router (tab navigation)
+- Expo Camera
+- Redux Toolkit + React Redux
+- AsyncStorage (`@react-native-async-storage/async-storage`)
+- NativeWind
+- TypeScript
+
+## Setup
+
+1. Clone the repo.
+2. Install dependencies:
+   - `yarn`
+3. Configure environment variables (see section below).
+4. Start the app:
+   - `yarn start`
+5. Open in Expo Go and grant camera permission.
+
+## Environment Variable Setup
+
+1. Create a `.env` file in the project root (same level as `package.json`).
+2. Add your Discogs access token:
+   - `EXPO_PUBLIC_DISCOGS_ACCESS_TOKEN=your_discogs_access_token_here`
+
+## Scripts
+
+- `yarn start`
+- `yarn android`
+- `yarn ios`
+- `yarn web`
 
 ## Roadmap
 
-- Implement user auth  
-- Add wishlist / search?
+- Implement user auth.
+- Enhance the profile screen.
 
-## Setup & Usage
+## Notes
 
-1. Clone the repo.  
-2. Run `yarn`.  
-3. Start the Expo project with `yarn start` or your preferred package manager.  
-4. Grant camera permission when prompted.  
-5. Use the Scan tab to scan barcodes and add records to your collection.  
-
-### Environment Variable Setup
-
-1. Create a `.env` file in the project root (same level as `package.json`).  
-2. Add your Discogs access token as an environment variable: `EXPO_PUBLIC_DISCOGS_ACCESS_TOKEN=your_discogs_access_token_here`
+- Collection data is local-only and stored on-device.
+- Current scan flow uses the first Discogs barcode search result.
 
 ## Android Screen Share Setup (scrcpy + Google Meet)
 

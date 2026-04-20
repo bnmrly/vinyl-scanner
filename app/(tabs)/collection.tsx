@@ -11,8 +11,7 @@ import { CollectionCardSimple } from "@/components/CollectionCardSimple";
 import { CollectionCardDetailed } from "@/components/CollectionCardDetailed";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { removeVinyl, selectAllVinyl } from "@/store/slices/collectionSlice";
-import { logLocalStorageCollection } from "@/store/persistence";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export enum ViewMode {
   Simple = "simple",
@@ -24,11 +23,6 @@ export const Collection = () => {
   const dispatch = useAppDispatch();
   const allVinyl = useAppSelector(selectAllVinyl);
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Simple);
-
-  useEffect(() => {
-    if (!__DEV__) return;
-    logLocalStorageCollection();
-  }, []);
 
   const isSimpleViewMode = viewMode === ViewMode.Simple;
   const hasCollectionItems = allVinyl.length > 0;
