@@ -20,9 +20,6 @@ export enum ViewMode {
 export const Collection = () => {
   const dispatch = useAppDispatch();
   const allVinyl = useAppSelector(selectAllVinyl);
-
-  console.log("🚀 --- Collection --- allVinyl:", allVinyl);
-
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Simple);
 
   useEffect(() => {
@@ -83,7 +80,6 @@ export const Collection = () => {
         }
         contentContainerStyle={{ padding: 16 }}
         renderItem={({ item: record }) => {
-          console.log("🚀 _ record:", record);
           return isSimpleViewMode ? (
             <CollectionCardSimple
               coverImage={record.coverImage}

@@ -16,15 +16,21 @@ const toVinylItem = (value: unknown): VinylItem | null => {
     return null;
   }
 
-  const artist =
+  const trimmedTitle = vinyl.title.trim();
+
+  const explicitArtist =
     typeof vinyl.artist === "string" && vinyl.artist.trim().length > 0
-      ? vinyl.artist
-      : "Unknown artist";
+      ? vinyl.artist.trim()
+      : null;
+
+  const hasRealExplicitArtist =
+    explicitArtist !== null &&
+    explicitArtist.toLowerCase() !== "unknown artist";
 
   return {
     id: vinyl.id,
-    artist,
-    title: vinyl.title,
+    artist: hasRealExplicitArtist ? explicitArtist : "Unknown artist",
+    title: trimmedTitle,
     coverImage: vinyl.coverImage,
   };
 };

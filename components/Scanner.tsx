@@ -13,23 +13,6 @@ import { AppText } from "./AppText";
 import { Card } from "./Card";
 import { Button } from "./Button";
 
-// Artist name cannot be reliably be accessed from the api response
-const splitArtistAndTitle = (discogsTitle: string) => {
-  const [artistPart, titlePart] = discogsTitle.split(" - ", 2);
-
-  if (!titlePart) {
-    return {
-      artist: "Unknown artist",
-      title: discogsTitle,
-    };
-  }
-
-  return {
-    artist: artistPart.trim() || "Unknown artist",
-    title: titlePart.trim() || discogsTitle,
-  };
-};
-
 export const Scanner = () => {
   const dispatch = useAppDispatch();
   const {
@@ -47,17 +30,14 @@ export const Scanner = () => {
   const recordInCollection = useAppSelector((state) =>
     scannedData ? selectVinylById(state, scannedData.id.toString()) : undefined,
   );
-  // const isAlreadyInCollection = !!existingVinyl;
 
   const handleSave = () => {
     if (scannedData && !recordInCollection) {
-      const { artist, title } = splitArtistAndTitle(scannedData.title);
-
       dispatch(
         addVinyl({
           id: scannedData.id.toString(),
-          artist,
-          title,
+          artist: scannedData.artist,
+          title: scannedData.title,
           coverImage: scannedData.cover_image,
         }),
       );
